@@ -15,16 +15,36 @@ password = ""
 
 #Easy version
 # remember that random.randint does an inclusive range
-for num in range(0, nr_numbers):
-    random_num = random.randint(0, 51)
-    password += letters[random_num]
+# for num in range(0, nr_numbers):
+#     random_num = random.randint(0, 51)
+#     password += letters[random_num]
+#
+# for num in range(0, nr_letters):
+#     random_num = random.randint(0, 9)
+#     password += numbers[random_num]
+#
+# for num in range(0, nr_symbols):
+#     random_num = random.randint(0, 8)
+#     password += symbols[random_num]
+#
+# print(f"Here's a new password: {password}")
 
-for num in range(0, nr_letters):
-    random_num = random.randint(0, 9)
-    password += numbers[random_num]
+#we need a list of characters so we can shuffle the values later
+password_list = []
+for num in range(0, nr_numbers):
+    # random.choice chooses a random index in an array so I'm assuming this is O(1)
+    password_list.append(random.choice(letters))
 
 for num in range(0, nr_symbols):
-    random_num = random.randint(0, 8)
-    password += symbols[random_num]
+    password_list.append(random.choice(symbols))
 
-print(f"Here's a new password: {password}")
+for num in range(0, nr_letters):
+    password_list.append(random.choice(numbers))
+
+# random.shuffle reorders a list. So I'm assuming it's O(n)
+random.shuffle(password_list)
+
+for letter in password_list:
+    password += letter
+
+print(f"Your password is: {password}")
